@@ -1,0 +1,60 @@
+"0","```r
+world <- get_stamenmap(
+  bbox = c(left = -180, bottom = -57, right = 179, top = 82.1),
+  maptype = \"terrain\",
+  zoom = 2
+)
+
+europe_africa <- get_stamenmap(
+  bbox = c(left = -40.61, bottom = 4.92, right = 41.57, top = 54.37),
+  maptype = \"terrain\",
+  zoom = 4
+)
+
+france <- get_stamenmap(
+  bbox = c(left = -5.471, bottom = 46.218, right = 4.801, top = 51.172),
+  maptype = \"terrain\",
+  zoom = 7
+)
+
+Debug <- get_stamenmap(
+  bbox = c(left = 2.1643, bottom = 50.7260, right = 4.7324, top = 51.9002),
+  maptype = \"terrain\",
+  zoom = 9
+)
+
+# birds$longitude1 <- birds$longitude
+# birds$longitude1 <- birds$longitude1[-1]
+# birds$longitude1[nrow(birds$longitude1[-1])+1] <- NA
+# 
+# birds$latitude1 <- birds$latitude
+# birds$latitude1[nrow(birds$latitude1[-1])+1] <- NA
+
+# birds %>%
+#   count(longitude1) %>%
+#   filter(is.na(longitude1)==T)
+
+# birds1 <- birds %>%
+#   mutate(longitude1 = longitude[nrow(longitude[-1])+1])
+#          latitude1 = latitude[-1])
+
+birds1 <- birds %>%
+  mutate(longitude1 = lag(longitude),
+         latitude1 = lag(latitude))
+  
+
+#God tier article: https://stackoverflow.com/questions/25687727/shifting-a-column-down-by-one
+
+ggmap(france) +
+  geom_point(
+    data = birds,
+    aes(x = longitude, y = latitude, color = bird_name),
+    alpha = 1,
+    size = 0.8
+  ) +
+  labs(x=\"Longitude\",y=\"Latitude\",title=\"Path of Bird Flight!\",color=\"Bird Name\")+
+  # geom_segment(data = birds1, aes(x = longitude, y = latitude, 
+  #                               xend = longitude1, yend = latitude1), 
+  #              color = \"yellow\", arrow = arrow(length = unit(0.2,\"cm\"))) +
+  theme_clean()
+```"

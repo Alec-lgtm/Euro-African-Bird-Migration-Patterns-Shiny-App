@@ -1,0 +1,39 @@
+"0","library(tidyverse)"
+"0","library(dplyr)"
+"0","library(ggmap)"
+"0","library(berryFunctions)"
+"2","
+Attaching package: ‘berryFunctions’
+
+"
+"2","The following object is masked from ‘package:dplyr’:
+
+    between
+
+"
+"0","library(ggthemes)"
+"0","library(RColorBrewer)"
+"0","library(gganimate)"
+"0","library(lubridate)"
+"0","library(transformr)"
+"0","library(metR)"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"
+"2","
+Attaching package: ‘metR’
+
+"
+"2","The following object is masked from ‘package:purrr’:
+
+    cross
+
+"
+"0","library(gganimate)"
+"0",""
+"0","birds <- read.csv(""bird_tracking_copy.csv"")"
+"0","#Data from https://www.kaggle.com/datasets/saikrishna20/bird-tracking"
+"0",""
+"0","forward_trajectory_6_7 <-  read.csv(""forward_trajectory_6_7.csv"")"
+"0","#Data from http://enram.github.io/bird-migration-flow-visualization/viz/2/nl-be/index.html "

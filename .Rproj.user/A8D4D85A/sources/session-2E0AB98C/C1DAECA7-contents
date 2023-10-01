@@ -1,0 +1,84 @@
+ui <- fluidPage(
+  theme = shinytheme("flatly"),
+  # tags$head(tags$style(HTML("
+  #                         body > nav{
+  #                         margin-bottom:0 !important;}
+  #                         body > div.container-fluid{
+  #                         padding:0;}
+  #                           "))),
+  navbarPage(title = "Bird Migration Flows",
+             tabPanel(title = "About",
+                      verticalLayout(
+                        h1("Euro-African Bird Migration Patterns and its Considerations"),
+                        p("Everyone is familiar with nature’s alarm clock: bird chirping. However little thought goes into these creature’s lives. Birds have an impressive journey they seasonally recur. Out of instinct, certain species know where to migrate and how to navigate back home. They use resources like the stars, sun, and earth's magnetism to help them find their way. They also almost always return home to where they were born. Their main purpose of migration is to go from areas of decreasing resources to areas with abundant resources. Birds seek two main resources: food and nesting locations, both equally fundamental to their survival. Over forty percent of the world’s birds migrate, although this is expected to increase due to the deforestation prevalence in tropical regions. In order to prepare for this grueling journey, Birds enter a state called hyperphagia, where they bulk up on food in the preceding weeks to store fat. Their aerodynamics include tailwinds, which blow in the same direction they fly in to help them go faster. Variables like speed, distance, and altitude need to be studied for these species to gain insight on their journeys. Birds play many different roles in the preservation of the environment: predators, prey, pollinators/ seed dispersers. It is imperative that through this research, humans are aided in their efforts to presrve birds’ habitats. "),
+                        fluidRow(column(7,imageOutput('euro_robin')),
+                                 column(5,imageOutput('white_stork_med'))),
+                        p("White storks (Ciconia ciconia) fly south from their summer breeding grounds in Europe starting in August and head for Africa. They spend the winter in savannahs from Kenya and Uganda, however,  some have even been known to make it down to the Cape Province of South Africa. Storks congregate in massive flocks despite their territorial nature. As for dietary preferences, they prefer to forage in meadows where the grasses are short  or in wetlands close to their nests. They eat a variety of foods including insects, worms, reptiles, and amphibians. They also munch on larger animals such as moles, shrews, and fish. European robins (Erithacus rubecula) head south to escape Scandinavian and northern continental Europe’s winter. Similar to the white storks, many migrating robins are faithful to both their summer and winter territories, which may be many thousands of miles apart. Robins reproduce bountifully, often producing between three and five broods a year, each set containing four or five eggs. These broods can overlap, where while the father starts nursing the recently hatched chicks, the mother is already working on the next batch. This enables the population to bounce back readily from any overwinter population losses. Animals that reproduce at such a rate signal overcompensation due to high rates of predation. A robin's lifespan is just 13 months on average due to high mortality within their first year of life. But if they can pass that marker, it increases up to 19 years. As for dietary preferences, Robins eat a wide variety of food including worms, seeds, nuts, suet, invertebrates, and fruit. Lastly, they are notorious for their familiarity with humans and forage for food in household backyards and readily accept seeds left out for them. "),
+                        div(
+                          style = 
+                            "height: 40px; background-color: #02BE7F; width: 100%; position: absolute; right:0;",
+                          p(HTML("Project <b>by Vanessa Leon and Alec Chen</b>"), 
+                            style="text-align:center;color: white")
+                        )
+                      )),
+             tabPanel(title = "Fun Facts",
+                      h1("Rapid Fire Facts!"),
+                      tags$ol(
+                        tags$li("At least 4,000 species of bird are regular migrants, which is about 40 percent of the total number of birds in the world."), 
+                        tags$li("The Arctic tern can fly more than 49,700 miles in a year, making a round trip between their breeding grounds in the Arctic and the Antarctic.And over its lifespan of more than 30 years, the flights can add up to the equivalent of three trips to the moon and back"),
+                        tags$li("Some birds, like the blackpoll warbler, almost double their body weight before flying 2,300 miles non-stop for 86 hours. 
+"),
+                        tags$li("The award for fastest bird goes to the great snipe: It flies around 4,200 miles at speeds of up to 60 mph!"),
+                        tags$li("the 1oz northern wheatear travels up to 9,000 miles each way between the Arctic and Africa, giving it one of the largest ranges of any songbird.")
+                      ),
+                      div(
+                        style = 
+                          "height: 40px; background-color: #02BE7F; width: 100%; position: absolute; right:0;",
+                        p(HTML("Project <b>by Vanessa Leon and Alec Chen</b>"), 
+                          style="text-align:center;color: white")
+                      )),
+             tabPanel(title = "Findings",
+                      h1("Findings"),
+                      p("Satellite data is the tool used to gather scans of bird migrations for analysis. In this case study, variables like latitude, longitude, speed, and altitude were collected from two datasets. The first dataset was an example of the nocturnal migration of European Robins over the Netherlands and Belgium in the spring. We processed data from five operational weather radars (two in the Netherlands, three in Belgium) from 5 April 2013 to 12 April 2013.The second dataset followed similar methodology except the number of observed white storks were limited to 3; Eric, Nico, and Sanne. Meanwhile the European robins had upwards of 3,800 birds tracked. The white storks were recorded on a year-long basis and their main trajectory of migration spanned from August 2013 and concluded in April 2014. "),
+                      fluidRow(
+                        column(5, plotOutput("enram")),
+                        column(7, plotOutput("storks")) # DO THIS SOON
+                        ),
+                      br(),
+                      br(),
+                      br(),
+                      br(),
+                      fluidRow(
+                        column(12, align="left",
+                               h3("Bird Altitude and Speed over time")
+                        )),
+                      sliderInput("DatesMerge2",
+                                  "Dates:",
+                                  min = min(birds$true_ymd),
+                                  max = max(birds$true_ymd),
+                                  value= as.POSIXct("2014-04-16","UTC"),
+                                  timeFormat="%Y-%m-%d",
+                                  animate=animationOptions(interval = 500, loop = TRUE)),
+                      fluidRow(
+                        column(12, align="center",
+                               plotOutput(outputId = "visualization2")
+                        )),
+                      p("The data corroborated known migration patterns of both species. The individual performance of the white storks stood out because, although these birds stand at about 3.5 feet tall and have a wingspan of roughly 5 feet, it was still impressive to see them reach a 2,500 ft altitude and speed of over 60 mph. As expected the relationship between speed and altitude are inversely proportional. As for the spatial visualizations, they were able to display the distance traveled in correspondence to time. The European robins were able to cross multiple countries within a week meanwhile a whole years worth of the storks travel was able to corroborate the fact that these birds never truly forget where home is and the cycle of their life remains continuous."),
+                      div(
+                        style = 
+                          "height: 40px; background-color: #02BE7F; width: 100%; position: absolute; right:0;",
+                        p(HTML("Project <b>by Vanessa Leon and Alec Chen</b>"), 
+                          style="text-align:center;color: white")
+                      )),
+             tabPanel(title = "Considerations",
+                      h1("Considerations"),
+                      div("As phenomenal as bird migration can be, it can also be equally dangerous for birds where many don’t often make it back to their starting point. Inevitable factors like harsh weather play a role, but most of the time, humans are to blame.  In the United States alone, up to one billion birds die each year from window collisions. Additionally, seven million die from striking TV and radio towers in North America annually. Not to mention the air pollution that toxifies their paths. We hope this article spreads awareness on these awe-striking creatures, so humans will have more consciousness on their carbon footprint and put an end to so much deforestation. With the dead trees gone the storks have to resort to man made structures, including houses. The draining and filling of wetlands for agricultural, housing and industrial use has greatly affected the population of storks, their feeding grounds have simply disappeared. No other animal travels at such speeds for such long distances, and for that they must be protected."),
+                      div(
+                        style = 
+                          "height: 40px; background-color: #02BE7F; width: 100%; position: absolute; right:0;",
+                        p(HTML("Project <b>by Vanessa Leon and Alec Chen</b>"), 
+                          style="text-align:center;color: white")
+                      )
+             )
+  )
+)

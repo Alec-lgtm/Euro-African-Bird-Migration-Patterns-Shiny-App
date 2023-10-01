@@ -1,0 +1,114 @@
+---
+title: "STAT 155 Final Project"
+author: "Gugo Babayan, Alec Chen, Eli Schue, Ian Staresinic"
+output:
+  pdf_document: default
+  html_document: default
+date: "2022-12-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Libraries
+
+```{r libraries}
+library(NHANES)
+library(GGally)
+library(tidyverse)
+library(tidyr)
+library(readr)
+library(dplyr)
+library(ggmosaic)
+library(broom)
+```
+
+## Wrangling
+
+``` {r}
+data(NHANES)
+
+NHANES$Diabetes <- unclass(NHANES$Diabetes)
+
+NHANES %>%
+  count(Diabetes)
+
+#Creating Income bands
+NHANES = NHANES %>%
+  mutate(Income_bands = case_when(
+    HHIncome %in% c("0-4999", "5000-9999", "10000-14999",
+                    "15000-19999", "20000-24999") ~ "0-24999",
+    HHIncome %in% c("25000-34999", "35000-44999", "45000-54999") ~ "25000-54999",
+    HHIncome %in% c("55000-64999", "65000-74999") ~ "55000-74999",
+    HHIncome %in% c("75000-99999") ~ "75000-99999",
+    
+    HHIncome == "more 99999" ~ "100000+"
+  ))
+
+#Make Diabetes Logistic
+NHANES <- NHANES %>%
+  filter(DiabetesAge > 18 | is.na(DiabetesAge)) %>%
+  mutate(Diabetes = case_when(Diabetes == 1 ~ 0,
+                              Diabetes == 2 ~ 1,
+                              )) #%>%
+  #drop_na(Diabetes)
+
+#Logistic Model
+NHANESlm <- NHANES %>% 
+  glm(formula = Diabetes ~ Income_bands + Weight + PhysActiveDays, family = "binomial")
+
+#Finding porportions for table 1
+NHANEStwo <- NHANES %>%
+  select(Income_bands,Diabetes,Weight,PhysActiveDays) %>%
+  mutate(Income_bands = factor(Income_bands))
+
+summary(NHANEStwo$PhysActiveDays)
+
+summary(NHANESlm)
+
+exp(coef(NHANESlm))
+
+sd(NHANEStwo$PhysActiveDays,na.rm=TRUE)
+
+print(NHANESlm)
+
+NHANES %>%
+  count(Weight) %>% arrange(Weight)
+
+exp(confint(NHANESlm))
+
+tidy(NHANESlm,exp=TRUE)
+```
+
+## Data Visualization
+
+``` {r}
+#Data viz
+NHANES <- NHANES %>%
+  mutate(fct_income_bands = as.factor(Income_bands))
+
+#Stacked Barplot
+NHANES %>%
+  drop_na(Diabetes) %>%
+  ggplot(aes(x=fct_income_bands, fill=factor(Diabetes))) +
+    geom_bar(position = "fill") +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+    labs(x = "Income Bands",y="Porportion", fill = "Diabetes") + 
+    scale_fill_discrete(labels = c("No", "Yes"))+
+    theme_classic()
+
+#Counts
+NHANES %>%
+  drop_na(Diabetes) %>%
+  ggplot(aes(x=fct_income_bands, fill=factor(Diabetes))) +
+    geom_bar(position = "dodge")+
+    labs(x = "Income Bands",y="Count", fill = "Diabetes") + 
+    scale_fill_discrete(labels = c("No", "Yes"))+
+    theme_classic()
+
+
+```
+ 
+
+

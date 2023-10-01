@@ -1,0 +1,9 @@
+"0","```r
+library(tidyverse)
+library(ggmap)
+library(berryFunctions)
+library(ggthemes)
+
+
+birds <- read.csv(\"bird_tracking.csv\")
+```"

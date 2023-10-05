@@ -40,7 +40,7 @@ To run the app, follow these steps:
 
 Execute the global.R file to start the Shiny app.
 
-# Data Cleaning
+## Data Cleaning
 The data cleaning process involves several steps to prepare the data for visualization. Here's an overview of the data cleaning process:
 
 - **Data Sources**: The project utilizes two datasets - one from Kaggle ([bird_tracking](https://www.kaggle.com/datasets/saikrishna20/bird-tracking)) and another from the [European Network for the Radar Surveillance of Animal Movement](https://github.com/enram/case-study).
@@ -49,20 +49,22 @@ The data cleaning process involves several steps to prepare the data for visuali
 
 - **Data Wrangling**: Data wrangling includes various operations such as filtering based on specific conditions and transformations using the dplyr package.
 
-Data Visualization
+## Data Visualization
 The app employs various data visualization techniques to present bird migration patterns effectively:
 
 - **Creating Maps**: Utilizing get_stamenmap(), the app generates maps of Europe and Africa, providing geographic context for bird migrations.
 
 - **Animated Visualizations**: The app uses gganimate to create animated visualizations of bird migrations, allowing users to observe migration trends dynamically.
 
-Acknowledgements
+## Acknowledgements
 - **Data Source**: ENRAM (European Network for the Radar Surveillance of Animal Movement) and Sri Sai Krishna N
 - **Advisor**: Brianna Heggeseth
 
 Feel free to reach out to the authors for more information or inquiries about the project.
 
 Note: Ensure that you have the required datasets and permissions before using this application.
+
+---
 
 Questions to ask Alicia:
 - Installation Instructions - do I need to make it more clear for people who don't have R?

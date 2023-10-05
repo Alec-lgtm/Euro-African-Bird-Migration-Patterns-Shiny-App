@@ -57,6 +57,7 @@ The app employs various data visualization techniques to present bird migration 
 - **Animated Visualizations**: The app uses gganimate to create animated visualizations of bird migrations, allowing users to observe migration trends dynamically.
 
 ## Acknowledgements
+
 - **Data Source**: ENRAM (European Network for the Radar Surveillance of Animal Movement) and Sri Sai Krishna N
 - **Advisor**: Brianna Heggeseth
 

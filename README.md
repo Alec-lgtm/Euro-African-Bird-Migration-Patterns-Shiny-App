@@ -2,7 +2,7 @@
 
 ## Description
 
-The Euro-African Bird Migration Patterns Shiny App is an interactive web application developed as a project for the class **COMP 112 (Introduction to Data Science)**. This app provides insights into the migration patterns and trends of European and African birds, with a specific focus on comparing the migration behavior of the European robin and the White stork. It offers valuable information on migration time, altitude, velocity, and more.
+The Euro-African Bird Migration Patterns Shiny App is an interactive web application developed as a project for the class **COMP 112 (Introduction to Data Science)** at Macalester College. This app provides insights into the migration patterns and trends of European and African birds, with a specific focus on comparing the migration behavior of the European robin and the White stork. It offers valuable information on migration time, altitude, velocity, and more.
 
 ## Authors
 

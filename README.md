@@ -64,11 +64,3 @@ The app employs various data visualization techniques to present bird migration 
 Feel free to reach out to the authors for more information or inquiries about the project.
 
 Note: Ensure that you have the required datasets and permissions before using this application.
-
----
-
-Questions to ask Alicia:
-- Installation Instructions - do I need to make it more clear for people who don't have R?
-
-For me
-- Add comments to explain the R code. And maybe figure out how to put gifs in the readme?

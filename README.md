@@ -25,17 +25,11 @@ To run the app, follow these steps:
    Run the following commands in R to install the necessary packages:
 
    ```R
+   library(shiny)
    library(tidyverse)
-   library(dplyr)
-   library(ggmap)
-   library(berryFunctions)
-   library(ggthemes)
-   library(RColorBrewer)
-   library(gganimate)
    library(lubridate)
-   library(transformr)
-   library(metR)
-   library(gganimate)
+   library(shinythemes)
+   library(ggplot2)
 2. **Run the App**
 
 Execute the global.R file to start the Shiny app.
